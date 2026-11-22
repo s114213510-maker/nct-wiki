@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 1200" width="100%" height="100%" style="background:#0B0E14; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <defs>
+    <!-- 珍珠香檳綠光暈 -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <linearGradient id="nctGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <feStop offset="0%" stop-color="#B4E858" />
+      <feStop offset="100%" stop-color="#00F0FF" />
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <feStop offset="0%" stop-color="#141A26" stop-opacity="0.9" />
+      <feStop offset="100%" stop-color="#0E131D" stop-opacity="0.9" />
+    </linearGradient>
+    <linearGradient id="gateBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <feStop offset="0%" stop-color="#162722" stop-opacity="0.95" />
+      <feStop offset="100%" stop-color="#0F1A24" stop-opacity="0.95" />
+    </linearGradient>
+  </defs>
+
+  <!-- 背景科技光點 -->
+  <circle cx="150" cy="180" r="160" fill="#B4E858" opacity="0.04" />
+  <circle cx="800" cy="950" r="220" fill="#00F0FF" opacity="0.03" />
+
+  <!-- 頂部標題區 -->
+  <rect x="380" y="35" width="200" height="28" rx="14" fill="#B4E858" fill-opacity="0.15" stroke="#B4E858" stroke-width="1.2" />
+  <text x="480" y="54" fill="#B4E858" font-size="11" font-weight="bold" letter-spacing="2" text-anchor="middle">SHIFT-LEFT ARCHITECTURE</text>
+  
+  <text x="480" y="100" fill="#FFFFFF" font-size="26" font-weight="bold" text-anchor="middle">NCT LLM Wiki 雙重小圈防錯工程架構圖</text>
+  <text x="480" y="128" fill="#94A3B8" font-size="13" text-anchor="middle">課堂講義第 26 頁落實：大圈很少轉，小圈轉得快（在離源頭最近的地方攔截錯誤）</text>
+
+  <!-- 連接箭頭線條定義 -->
+  <!-- 1 -> 2 -->
+  <line x1="480" y1="210" x2="480" y2="240" stroke="#B4E858" stroke-width="2" stroke-dasharray="4,4" />
+  <polygon points="480,245 475,237 485,237" fill="#B4E858" />
+
+  <!-- 2 -> Gate 0 -->
+  <line x1="480" y1="325" x2="480" y2="355" stroke="#B4E858" stroke-width="2" stroke-dasharray="4,4" />
+  <polygon points="480,360 475,352 485,352" fill="#B4E858" />
+
+  <!-- Gate 0 -> Gate 1 -->
+  <line x1="480" y1="465" x2="480" y2="495" stroke="#B4E858" stroke-width="2" stroke-dasharray="4,4" />
+  <polygon points="480,500 475,492 485,492" fill="#B4E858" />
+
+  <!-- Gate 1 -> Stage 3 -->
+  <line x1="480" y1="645" x2="480" y2="675" stroke="#B4E858" stroke-width="2" stroke-dasharray="4,4" />
+  <polygon points="480,680 475,672 485,672" fill="#B4E858" />
+
+  <!-- Stage 3 -> Gate 2 -->
+  <line x1="480" y1="760" x2="480" y2="790" stroke="#B4E858" stroke-width="2" stroke-dasharray="4,4" />
+  <polygon points="480,795 475,787 485,787" fill="#B4E858" />
+
+  <!-- Gate 2 -> Stage 4 -->
+  <line x1="480" y1="940" x2="480" y2="970" stroke="#B4E858" stroke-width="2" stroke-dasharray="4,4" />
+  <polygon points="480,975 475,967 485,967" fill="#B4E858" />
+
+  <!-- ================= 卡片節點區 ================= -->
+
+  <!-- 階段 1: 原始資料 Ingestion -->
+  <g transform="translate(140, 150)">
+    <rect width="680" height="60" rx="10" fill="url(#cardBg)" stroke="#B4E858" stroke-width="1.2" stroke-opacity="0.4" />
+    <text x="25" y="30" fill="#FFFFFF" font-size="15" font-weight="bold">📥 階段一：原始多源資料攝入 (Raw Sources Ingestion)</text>
+    <rect x="520" y="15" width="135" height="22" rx="4" fill="#FFFFFF" fill-opacity="0.08" />
+    <text x="587" y="30" fill="#B4E858" font-size="11" font-family="monospace" text-anchor="middle">raw_sources/ (5篇)</text>
+    <text x="25" y="48" fill="#94A3B8" font-size="12">涵蓋 2016-2026 官方白皮書、首爾隊 Fact Check、DREAM 畢業制波折、WayV 華語開拓與 SM 3.0 改革。</text>
+  </g>
+
+  <!-- 階段 2: Wiki 知識庫構建 -->
+  <g transform="translate(140, 245)">
+    <rect width="680" height="80" rx="10" fill="url(#cardBg)" stroke="#B4E858" stroke-width="1.2" stroke-opacity="0.4" />
+    <text x="25" y="30" fill="#FFFFFF" font-size="15" font-weight="bold">📚 階段二：LLM Wiki 結構化知識庫構建</text>
+    <rect x="515" y="15" width="140" height="22" rx="4" fill="#FFFFFF" fill-opacity="0.08" />
+    <text x="585" y="30" fill="#B4E858" font-size="11" font-family="monospace" text-anchor="middle">wiki/ (35篇 Markdown)</text>
+    <text x="25" y="52" fill="#94A3B8" font-size="12">按「概念 (concepts)」、「分隊 (units)」、「成員 (members)」、「時間線 (timeline)」與「術語 (glossary)」構建。</text>
+    <text x="25" y="68" fill="#94A3B8" font-size="12">27 位成員全員配置雙向超連結與狀態標籤，建立高內聚知識網。</text>
+  </g>
+
+  <!-- 基礎閘門: Wiki Lint Check -->
+  <g transform="translate(140, 360)">
+    <rect width="680" height="105" rx="10" fill="url(#gateBg)" stroke="#B4E858" stroke-width="1.8" filter="url(#glow)" />
+    <rect width="680" height="105" rx="10" fill="url(#gateBg)" stroke="#B4E858" stroke-width="1.8" />
+    <text x="25" y="30" fill="#B4E858" font-size="15" font-weight="bold">🔍 基礎關卡：Wiki Lint 自動化結構檢驗 (Orphan &amp; Link Check)</text>
+    <rect x="495" y="15" width="160" height="22" rx="4" fill="#FFFFFF" fill-opacity="0.08" />
+    <text x="575" y="30" fill="#B4E858" font-size="11" font-family="monospace" text-anchor="middle">scripts/lint_wiki.ps1</text>
+    <text x="25" y="54" fill="#CBD5E1" font-size="12.5">全面檢驗 35 篇文檔：無孤島頁面 (Inbound Links &gt; 0)、雙向連結對稱、術語前置定義完備。</text>
+    <rect x="25" y="68" width="630" height="24" rx="4" fill="#FF5370" fill-opacity="0.12" stroke="#FF5370" stroke-width="0.8" />
+    <text x="35" y="84" fill="#FFA2B2" font-size="11.5">🔄 【小圈回溯機制 0】：若發現斷鏈或孤立頁面，立即在 Wiki Markdown 層局部修復，不進入後續大綱。</text>
+  </g>
+
+  <!-- 核心小圈 1: Gate 1 SSOT 事實閘門 -->
+  <g transform="translate(140, 500)">
+    <rect width="680" height="145" rx="10" fill="url(#gateBg)" stroke="#B4E858" stroke-width="2" filter="url(#glow)" />
+    <rect width="680" height="145" rx="10" fill="url(#gateBg)" stroke="#B4E858" stroke-width="2" />
+    <text x="25" y="30" fill="#B4E858" font-size="15" font-weight="bold">🔒 第一重小圈 (Gate 1)：SSOT 唯一事實狀態一致性閘門</text>
+    <rect x="495" y="15" width="160" height="22" rx="4" fill="#FFFFFF" fill-opacity="0.08" />
+    <text x="575" y="30" fill="#B4E858" font-size="11" font-family="monospace" text-anchor="middle">specs/ssot_facts.md</text>
+    
+    <text x="25" y="56" fill="#FFFFFF" font-size="13" font-weight="bold">🎯 核心攔截目標：時間線滯後與舊記憶幻覺（Mark 2026 離隊 / 昀昀 2026 離隊 / 兵役現況）</text>
+    <text x="25" y="78" fill="#CBD5E1" font-size="12.5">在生成大綱前，強制抽取 SSOT 表並透過腳本比對：成員狀態標籤必須 100% 依據 raw_sources，</text>
+    <text x="25" y="96" fill="#CBD5E1" font-size="12.5">禁止調用 LLM 內部過時知識，徹底封殺「將已離隊成員誤植為現役」的經典幻覺錯誤。</text>
+
+    <rect x="25" y="108" width="630" height="24" rx="4" fill="#FF5370" fill-opacity="0.12" stroke="#FF5370" stroke-width="0.8" />
+    <text x="35" y="124" fill="#FFA2B2" font-size="11.5">🔄 【小圈回溯機制 1】：若發現事實矛盾，直接在事實表小圈退回修正（最多重試3次），不轉大圈。</text>
+  </g>
+
+  <!-- 階段 3: Slide Spec 逐頁規格 -->
+  <g transform="translate(140, 680)">
+    <rect width="680" height="80" rx="10" fill="url(#cardBg)" stroke="#B4E858" stroke-width="1.2" stroke-opacity="0.4" />
+    <text x="25" y="30" fill="#FFFFFF" font-size="15" font-weight="bold">📐 階段三：逐頁規格與量化設計 (Slide Specs Planning)</text>
+    <rect x="495" y="15" width="160" height="22" rx="4" fill="#FFFFFF" fill-opacity="0.08" />
+    <text x="575" y="30" fill="#B4E858" font-size="11" font-family="monospace" text-anchor="middle">specs/slide_spec.md</text>
+    <text x="25" y="52" fill="#94A3B8" font-size="12">產出全套 17 頁教學規格，規劃珍珠香檳綠主視覺與四大分隊專屬回歸風格：</text>
+    <text x="25" y="68" fill="#94A3B8" font-size="12">127 Fact Check、DREAM We Go Up、WayV Turn Back Time、WISH Steady。</text>
+  </g>
+
+  <!-- 核心小圈 2: Gate 2 Spec 量化閘門 -->
+  <g transform="translate(140, 795)">
+    <rect width="680" height="145" rx="10" fill="url(#gateBg)" stroke="#B4E858" stroke-width="2" filter="url(#glow)" />
+    <rect width="680" height="145" rx="10" fill="url(#gateBg)" stroke="#B4E858" stroke-width="2" />
+    <text x="25" y="30" fill="#B4E858" font-size="15" font-weight="bold">⚖️ 第二重小圈 (Gate 2)：Spec 量化防破版閘門</text>
+    <rect x="480" y="15" width="175" height="22" rx="4" fill="#FFFFFF" fill-opacity="0.08" />
+    <text x="567" y="30" fill="#B4E858" font-size="11" font-family="monospace" text-anchor="middle">scripts/check_gate2_spec.ps1</text>
+
+    <text x="25" y="56" fill="#FFFFFF" font-size="13" font-weight="bold">🎯 核心攔截目標：文字超載與畫面破版（單頁字數 &lt;= 120 字 / 卡片 &lt;= 4 張 / 必附溯源）</text>
+    <text x="25" y="78" fill="#CBD5E1" font-size="12.5">在撰寫 HTML 程式碼前，由腳本逐頁檢核 17 頁規格文字，卡死版面空間與卡片配置，</text>
+    <text x="25" y="96" fill="#CBD5E1" font-size="12.5">將原本在瀏覽器渲染後才靠人工肉眼發現的溢出（Overflow）問題，徹底前移在規格文字層攔截。</text>
+
+    <rect x="25" y="108" width="630" height="24" rx="4" fill="#FF5370" fill-opacity="0.12" stroke="#FF5370" stroke-width="0.8" />
+    <text x="35" y="124" fill="#FFA2B2" font-size="11.5">🔄 【小圈回溯機制 2】：文字超標時僅局部重寫該頁 Spec，不牽動其他頁面，杜絕「改對A頁改壞B頁」。</text>
+  </g>
+
+  <!-- 階段 4: HTML 簡報渲染發布 -->
+  <g transform="translate(140, 975)">
+    <rect width="680" height="90" rx="10" fill="url(#cardBg)" stroke="#B4E858" stroke-width="1.8" />
+    <text x="25" y="30" fill="#FFFFFF" font-size="15" font-weight="bold">🚀 階段四：教學 HTML 簡報渲染與 GitHub 發布</text>
+    <rect x="475" y="15" width="180" height="22" rx="4" fill="#B4E858" fill-opacity="0.2" stroke="#B4E858" stroke-width="1" />
+    <text x="565" y="30" fill="#B4E858" font-size="11" font-family="monospace" text-anchor="middle" font-weight="bold">presentation/index.html</text>
+    <text x="25" y="54" fill="#CBD5E1" font-size="12.5">全套 17 頁全息雷射簡報 Zero-Shot 一次渲染通過！完全無字數溢出破版，流暢支援鍵盤切換與動態指示。</text>
+    <text x="25" y="72" fill="#94A3B8" font-size="12">託管於 GitHub Pages 即時交付，達成 9~10 分工程標準。</text>
+  </g>
+
+  <!-- 底部工程效益指標 -->
+  <g transform="translate(140, 1090)">
+    <rect width="325" height="70" rx="8" fill="#FFFFFF" fill-opacity="0.03" stroke="#FFFFFF" stroke-opacity="0.1" />
+    <text x="20" y="28" fill="#00F0FF" font-size="13" font-weight="bold">⚡ 講義「小圈轉得快」效益</text>
+    <text x="20" y="48" fill="#94A3B8" font-size="11.5">事實與排版問題在上游小圈秒級解決，</text>
+    <text x="20" y="62" fill="#94A3B8" font-size="11.5">節省 90% 以上的大模型 Token 與重跑時間。</text>
+
+    <rect x="355" y="10" width="325" height="70" rx="8" fill="#FFFFFF" fill-opacity="0.03" stroke="#FFFFFF" stroke-opacity="0.1" />
+    <text x="375" y="38" fill="#B4E858" font-size="13" font-weight="bold">🛡️ 講義「大圈極少轉」保證</text>
+    <text x="375" y="58" fill="#94A3B8" font-size="11.5">最終渲染階段接收的已是 100% 精準成品，</text>
+    <text x="375" y="72" fill="#94A3B8" font-size="11.5">杜絕整份 HTML 推翻重寫的高風險代價。</text>
+  </g>
+
+</svg>

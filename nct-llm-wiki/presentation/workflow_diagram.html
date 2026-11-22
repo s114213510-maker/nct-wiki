@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Wiki Shift-Left 架構流程圖 | NCT 體制教學專案</title>
+  <style>
+    :root {
+      --bg-base: #0B0E14;
+      --card-bg: rgba(20, 26, 38, 0.78);
+      --border-color: rgba(180, 232, 88, 0.3);
+      --nct-green: #B4E858;
+      --nct-glow: rgba(180, 232, 88, 0.4);
+      --cyan-glow: #00F0FF;
+      --warn-red: #FF5370;
+      --text-main: #FFFFFF;
+      --text-muted: #94A3B8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    }
+
+    body {
+      background: var(--bg-base);
+      color: var(--text-main);
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(180, 232, 88, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(0, 240, 255, 0.06) 0%, transparent 45%);
+    }
+
+    .diagram-container {
+      width: 100%;
+      max-width: 1050px;
+      background: rgba(14, 19, 29, 0.85);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 40px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 16px 50px rgba(0,0,0,0.5), 0 0 30px rgba(180, 232, 88, 0.15);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      background: rgba(180, 232, 88, 0.15);
+      border: 1px solid var(--nct-green);
+      color: var(--nct-green);
+      border-radius: 20px;
+      margin-bottom: 12px;
+      box-shadow: 0 0 12px var(--nct-glow);
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(90deg, #FFFFFF, #B4E858, #00F0FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    p.desc {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* 流程節點網格 */
+    .flow-pipeline {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+    }
+
+    .stage-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px 24px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .stage-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--nct-green);
+      box-shadow: 0 8px 24px var(--nct-glow);
+    }
+
+    .stage-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .stage-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stage-badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--nct-green);
+      font-family: monospace;
+      font-weight: bold;
+    }
+
+    .stage-content {
+      font-size: 13.5px;
+      color: #CBD5E1;
+      line-height: 1.6;
+    }
+
+    /* 檢查閘門特化 */
+    .gate-card {
+      background: linear-gradient(135deg, rgba(20, 32, 28, 0.9), rgba(15, 23, 42, 0.85));
+      border: 1px solid var(--nct-green);
+      box-shadow: 0 0 16px rgba(180, 232, 88, 0.2);
+    }
+
+    .gate-card .stage-title {
+      color: var(--nct-green);
+    }
+
+    .gate-loop-note {
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: rgba(255, 83, 112, 0.12);
+      border-left: 3px solid var(--warn-red);
+      border-radius: 4px;
+      font-size: 12px;
+      color: #FFA2B2;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .arrow-down {
+      text-align: center;
+      color: var(--nct-green);
+      font-size: 20px;
+      opacity: 0.8;
+      text-shadow: 0 0 8px var(--nct-glow);
+      margin: -6px 0;
+    }
+
+    /* 成果交接與效益 */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .benefit-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .benefit-box h3 {
+      font-size: 14px;
+      color: var(--cyan-glow);
+      margin-bottom: 6px;
+    }
+
+    .benefit-box p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="diagram-container">
+    <header>
+      <div class="pill">Shift-Left Engineering Architecture</div>
+      <h1>NCT LLM Wiki 雙重小圈防錯系統流程圖</h1>
+      <p class="desc">講義第 26 頁原則落實：大圈很少轉，小圈轉得很快（在離源頭最近的地方攔截錯誤）</p>
+    </header>
+
+    <div class="flow-pipeline">
+
+      <!-- 階段 1 -->
+      <div class="stage-card">
+        <div class="stage-header">
+          <div class="stage-title">📥 階段一：原始多源資料攝入 (Raw Sources Ingestion)</div>
+          <span class="stage-badge">raw_sources/*.md (共5篇)</span>
+        </div>
+        <div class="stage-content">
+          攝入 2016-2026 官方白皮書、首爾隊 Fact Check 歷程、DREAM 畢業制波折、WayV 華語開拓與 SM 3.0 改革宣告。
+        </div>
+      </div>
+
+      <div class="arrow-down">▼</div>
+
+      <!-- 階段 2 -->
+      <div class="stage-card">
+        <div class="stage-header">
+          <div class="stage-title">📚 階段二：LLM Wiki 結構化知識庫構建</div>
+          <span class="stage-badge">wiki/ (35篇 Markdown)</span>
+        </div>
+        <div class="stage-content">
+          按「概念 (concepts)」、「分隊 (units)」、「成員 (members)」、「時間線 (timeline)」與「術語 (glossary)」自動建立完整雙向關聯索引。
+        </div>
+      </div>
+
+      <div class="arrow-down">▼</div>
+
+      <!-- 閘門 0: Wiki Lint -->
+      <div class="stage-card gate-card">
+        <div class="stage-header">
+          <div class="stage-title">🔍 基礎關卡：Wiki Lint 自動化結構檢驗</div>
+          <span class="stage-badge">scripts/lint_wiki.ps1</span>
+        </div>
+        <div class="stage-content">
+          全面檢測 35 篇文件是否存在孤島頁面 (Inbound Links = 0)、雙向連結對稱性與 K-Pop 專屬行話辭典 (Glossary)。
+        </div>
+        <div class="gate-loop-note">
+          🔄 <b>小圈回溯機制 0</b>：若發現斷鏈或孤立頁面，立即在 Wiki Markdown 層局部修復，不外溢至後續階段。
+        </div>
+      </div>
+
+      <div class="arrow-down">▼</div>
+
+      <!-- 閘門 1: SSOT -->
+      <div class="stage-card gate-card">
+        <div class="stage-header">
+          <div class="stage-title">🔒 第一重小圈 (Gate 1)：SSOT 唯一事實狀態一致性閘門</div>
+          <span class="stage-badge">specs/ssot_facts.md</span>
+        </div>
+        <div class="stage-content">
+          <b>攔截時間線滯後與舊記憶幻覺</b>：在生成簡報大綱前，強制抽取成員與分隊唯一事實表，鎖死每位成員的狀態標籤 (<code>active</code> / <code>inactive</code> / <code>former</code>) 與 2026 最新離隊年月（如 Mark 2026.04 離隊、昀昀 2026.07 離隊），禁止模型偷渡外部舊記憶。
+        </div>
+        <div class="gate-loop-note">
+          🔄 <b>小圈回溯機制 1</b>：若事實核對失敗，僅退回事實表與對應成員頁修正，最多重試 3 次，禁止帶著事實錯誤生成大綱。
+        </div>
+      </div>
+
+      <div class="arrow-down">▼</div>
+
+      <!-- 階段 3 -->
+      <div class="stage-card">
+        <div class="stage-header">
+          <div class="stage-title">📐 階段三：逐頁規格與量化設計 (Slide Specs Planning)</div>
+          <span class="stage-badge">specs/slide_spec.md</span>
+        </div>
+        <div class="stage-content">
+          產出全套 17 頁教學規格，規劃珍珠香檳綠主視覺與四大分隊專屬回歸主題風格（Fact Check / We Go Up / Turn Back Time / Steady）。
+        </div>
+      </div>
+
+      <div class="arrow-down">▼</div>
+
+      <!-- 閘門 2: Spec Quant -->
+      <div class="stage-card gate-card">
+        <div class="stage-header">
+          <div class="stage-title">⚖️ 第二重小圈 (Gate 2)：Spec 量化防破版閘門</div>
+          <span class="stage-badge">scripts/check_gate2_spec.ps1</span>
+        </div>
+        <div class="stage-content">
+          <b>攔截字數超載與畫面破版</b>：在渲染 HTML 前，以自動化腳本硬性檢查量化指標：<b>單頁正文字數 ≤ 120 字、核心卡片 ≤ 4 張、每頁必附 [Source: ...] 標籤</b>。
+        </div>
+        <div class="gate-loop-note">
+          🔄 <b>小圈回溯機制 2</b>：若字數超載或卡片超標，僅退回該頁文字規格重寫，杜絕文字溢出 (Overflow) 破壞版面。
+        </div>
+      </div>
+
+      <div class="arrow-down">▼</div>
+
+      <!-- 階段 4 -->
+      <div class="stage-card">
+        <div class="stage-header">
+          <div class="stage-title">💻 階段四：教學 HTML 簡報渲染與發布</div>
+          <span class="stage-badge">presentation/index.html</span>
+        </div>
+        <div class="stage-content">
+          一次性生成兼具 17 頁全息雷射科技感、回歸色彩變換、動態分頁切換與鍵盤快捷鍵支援的獨立 HTML 簡報。
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 效益說明 -->
+    <div class="benefit-grid">
+      <div class="benefit-box">
+        <h3>⚡ 講義「小圈轉得快」效益</h3>
+        <p>錯誤在上游（事實層與文字規格層）即被自動化腳本小圈攔截修復，避免「改對 A 頁、改壞 B 頁」，節省 90% 以上的大模型 Token 耗費。</p>
+      </div>
+      <div class="benefit-box">
+        <h3>🛡️ 「大圈極少轉」保證</h3>
+        <p>最終 HTML 渲染階段接收到的已經是 100% 事實無誤且字數排版嚴格受控的成品，實現 Zero-Shot 零破版完美交付。</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
