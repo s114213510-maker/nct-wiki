@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>解碼 K-Pop 最前衛的男團品牌：什麼是 NCT？ | 17 頁教學型全息簡報</title>
+  <style>
+    :root {
+      --bg-base: #0B0E14;
+      --text-main: #FFFFFF;
+      --text-muted: #8E9BAE;
+      --nct-green: #B4E858;
+      --nct-glow: rgba(180, 232, 88, 0.45);
+      --glass-bg: rgba(20, 26, 38, 0.72);
+      --glass-border: rgba(180, 232, 88, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-image: 
+        radial-gradient(circle at 12% 18%, rgba(180, 232, 88, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 88% 82%, rgba(0, 240, 255, 0.06) 0%, transparent 40%);
+    }
+
+    /* 頂部導航列 */
+    header {
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(11, 14, 20, 0.88);
+      backdrop-filter: blur(14px);
+      z-index: 20;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--nct-green);
+      text-shadow: 0 0 12px var(--nct-glow);
+    }
+
+    .brand-pill {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: rgba(180, 232, 88, 0.15);
+      border: 1px solid var(--nct-green);
+      color: #FFF;
+      letter-spacing: 1px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .slide-progress {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-family: monospace;
+    }
+
+    /* 簡報主舞台 */
+    main {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 40px;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      max-width: 1120px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(22px) scale(0.98);
+      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    .slide-header {
+      border-left: 4px solid var(--nct-green);
+      padding-left: 18px;
+    }
+
+    .slide-tag {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--nct-green);
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .slide-title {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #FFFFFF, #E2E8F0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .slide-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* 卡片容器網格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--nct-green);
+      opacity: 0.7;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--nct-green);
+      box-shadow: 0 10px 32px var(--nct-glow);
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #FFF;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-text {
+      font-size: 13.5px;
+      color: #CBD5E1;
+      line-height: 1.6;
+    }
+
+    .source-tag {
+      font-size: 11px;
+      color: var(--text-muted);
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: monospace;
+    }
+
+    /* 各分隊專屬回歸主題特化 */
+    /* 1. NCT 127: Fact Check (首爾金屬宮殿霸氣) */
+    .theme-127 .card {
+      border-color: rgba(218, 165, 32, 0.4);
+      background: linear-gradient(135deg, rgba(20, 24, 32, 0.9), rgba(45, 36, 18, 0.5));
+    }
+    .theme-127 .card::before {
+      background: linear-gradient(90deg, #D4AF37, #FFDF73);
+    }
+    .theme-127 .slide-header {
+      border-left-color: #D4AF37;
+    }
+
+    /* 2. NCT DREAM: We Go Up (街頭滑板高飽和綠光動感) */
+    .theme-dream .card {
+      border-color: rgba(74, 222, 128, 0.4);
+      background: linear-gradient(135deg, rgba(16, 28, 20, 0.85), rgba(20, 36, 28, 0.6));
+    }
+    .theme-dream .card::before {
+      background: linear-gradient(90deg, #22C55E, #4ADE80);
+    }
+    .theme-dream .slide-header {
+      border-left-color: #4ADE80;
+    }
+
+    /* 3. WayV: Turn Back Time (冷冽鐘錶機械與暗紅警戒反差) */
+    .theme-wayv .card {
+      border-color: rgba(239, 68, 68, 0.4);
+      background: linear-gradient(135deg, rgba(28, 16, 20, 0.9), rgba(18, 18, 26, 0.8));
+    }
+    .theme-wayv .card::before {
+      background: linear-gradient(90deg, #EF4444, #991B1B);
+    }
+    .theme-wayv .slide-header {
+      border-left-color: #EF4444;
+    }
+
+    /* 4. NCT WISH: Steady (千禧 Y2K 純白晨曦治癒) */
+    .theme-wish .card {
+      border-color: rgba(167, 243, 208, 0.5);
+      background: linear-gradient(135deg, rgba(24, 34, 38, 0.8), rgba(30, 48, 52, 0.5));
+    }
+    .theme-wish .card::before {
+      background: linear-gradient(90deg, #6EE7B7, #A7F3D0);
+    }
+    .theme-wish .slide-header {
+      border-left-color: #A7F3D0;
+    }
+
+    /* 底部控制列 */
+    footer {
+      padding: 14px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(11, 14, 20, 0.88);
+      backdrop-filter: blur(14px);
+      z-index: 20;
+    }
+
+    .indicators {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      max-width: 60%;
+      padding: 4px 0;
+    }
+
+    .dot {
+      width: 16px;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .dot.active {
+      background: var(--nct-green);
+      width: 32px;
+      box-shadow: 0 0 10px var(--nct-glow);
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+    }
+
+    button {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFF;
+      padding: 8px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    button:hover:not(:disabled) {
+      background: var(--nct-green);
+      color: #0B0E14;
+      border-color: var(--nct-green);
+      box-shadow: 0 0 14px var(--nct-glow);
+    }
+
+    button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .flow-badge {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(180, 232, 88, 0.2);
+      color: var(--nct-green);
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 頂部導航 -->
+  <header>
+    <div class="brand-logo">
+      <span>NEO CULTURE TECHNOLOGY</span>
+      <span class="brand-pill">17-SLIDE MASTERCLASS</span>
+    </div>
+    <div class="header-right">
+      <div class="slide-progress" id="progressText">Slide 01 / 17</div>
+    </div>
+  </header>
+
+  <!-- 簡報舞台 -->
+  <main>
+
+    <!-- Slide 1: 封面與簡介 -->
+    <div class="slide active" data-index="1">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 01 // Overview</span>
+        <h1 class="slide-title">解碼 K-Pop 最前衛的男團品牌：什麼是 NCT？</h1>
+        <p class="slide-subtitle">給零基礎路人的新文化技術全圖解</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">💡 品牌核心定義</div>
+          <div class="card-text">NCT 全稱 Neo Culture Technology，是韓國 SM 娛樂於 2016 年創立的大型男團品牌。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🌐 三大顛覆規則</div>
+          <div class="card-text">打破傳統人數限制，具備「開放性」、「無限擴張」與「跨隊組合靈活性」。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">✨ 官方應援標誌</div>
+          <div class="card-text">全體共享應援色珍珠香檳綠 (Pearl Neo Champagne)，結合前衛科技雷射光感。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/concepts/neo_culture_technology.md]</div>
+    </div>
+
+    <!-- Slide 2: 傳統偶像團體 vs NCT 體制 -->
+    <div class="slide" data-index="2">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 02 // Contrast</span>
+        <h1 class="slide-title">傳統偶像團體 vs NCT 顛覆體制</h1>
+        <p class="slide-subtitle">為什麼不能用一般偶像男團的邏輯看待 NCT？</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">👥 傳統男團架構</div>
+          <div class="card-text">固定 4 至 9 人、固定合約週期，任何一人入伍或變動都牽動整團活動停擺。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🪐 NCT 先鋒架構</div>
+          <div class="card-text">人數不設上限、以全球城市為基底設立分隊，按曲風自由分流與跨隊組合。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">⚽ 路人直觀比喻</div>
+          <div class="card-text">傳統男團就像一支國家足球隊，而 NCT 更像擁有青訓與多支一線隊的跨國球團。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/concepts/neo_culture_technology.md]</div>
+    </div>
+
+    <!-- Slide 3: 體制核心架構：品牌傘 -->
+    <div class="slide" data-index="3">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 03 // Architecture</span>
+        <h1 class="slide-title">體制核心架構：品牌傘與多維矩陣</h1>
+        <p class="slide-subtitle">像科技公司平台一樣運作的立體組織</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">🏢 品牌母艦總傘</div>
+          <div class="card-text">NCT 作為頂層母品牌，賦予所有小分隊統一的 Neo 科技識別與官方應援。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🛡️ 四大主力固定隊</div>
+          <div class="card-text">127（首爾）、DREAM（青春）、WayV（大中華）、WISH（日本最終隊）。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔄 跨隊輪替旗艦</div>
+          <div class="card-text">NCT U 根據每首歌曲風格，從全體成員中自由跨隊調度合適的先鋒陣容。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🌟 年度全體大企劃</div>
+          <div class="card-text">2018、2020、2021、2023 召集全體成員合體發行正規大碟。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/concepts/neo_culture_technology.md]</div>
+    </div>
+
+    <!-- Slide 4: NCT U -->
+    <div class="slide" data-index="4">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 04 // Dynamic Frontier</span>
+        <h1 class="slide-title">NCT U：無固定編制的戰術先鋒</h1>
+        <p class="slide-subtitle">打破隊伍邊界，只為音樂概念服務的靈動分隊</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">🚀 體制首發第一槍</div>
+          <div class="card-text">2016 年 4 月以《The 7th Sense》打響體制第一槍，確立前衛實驗美學。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔀 動態組合機制</div>
+          <div class="card-text">U 代表 United，沒有固定隊長與成員，每首歌的陣容都是專屬定制。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🎵 跨世代代表曲</div>
+          <div class="card-text">《Without You》、《Boss》、《Make A Wish》、《Baggy Jeans》。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/units/nct_u.md]</div>
+    </div>
+
+    <!-- Slide 5: NCT 127 首爾本隊 -->
+    <div class="slide theme-127" data-index="5">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 05 // Seoul Unit</span>
+        <h1 class="slide-title">NCT 127：首爾經度上的先鋒本隊</h1>
+        <p class="slide-subtitle">扎根韓流起源地首爾，引領全球潮流的固定旗艦</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">📍 東經 127 度由來</div>
+          <div class="card-text">首爾的經度為東經 127 度，象徵立足韓流起源地，向全世界傳播前衛力量。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">⚡ 標誌性 Neo 音樂</div>
+          <div class="card-text">以強烈重低音實驗嘻哈、複雜 Bassline 與超高難度刀群舞聞名全球。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🏛️ 陣容定型歷程</div>
+          <div class="card-text">歷經 7 人、9 人至 10 人擴充，最終成為 NCT 最具統治力的主力固定分隊。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/units/nct_127.md]</div>
+    </div>
+
+    <!-- Slide 6: NCT 127 代表作 Fact Check -->
+    <div class="slide theme-127" data-index="6">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 06 // Fact Check Era</span>
+        <h1 class="slide-title">代表作解構：Fact Check 不可思議</h1>
+        <p class="slide-subtitle">首爾宮殿古蹟與未來雷射光學的帝王級融合</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">👑 宮殿科技美學</div>
+          <div class="card-text">將首爾歷史古蹟景福宮與超現代雷射結合，展現高對比度金屬君王風範。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔍 事實查核核心精神</div>
+          <div class="card-text">「不可撼動的實力」，用無懈可擊的音樂與舞台，對外界評價進行事實查核。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🏙️ 首爾主場統治力</div>
+          <div class="card-text">磅礡的大型編舞與夜幕俯瞰視角，確立了首爾本隊在流行音樂界的王者地位。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/units/nct_127.md]</div>
+    </div>
+
+    <!-- Slide 7: NCT DREAM 青春概念 -->
+    <div class="slide theme-dream" data-index="7">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 07 // Youth Concept</span>
+        <h1 class="slide-title">NCT DREAM：為青春陪伴而生的少年隊</h1>
+        <p class="slide-subtitle">全員未成年出發，書寫 K-Pop 最真實的成長史詩</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">🌱 青澀純粹起步</div>
+          <div class="card-text">2016 年以全員未成年（10代少年）清新出道，單曲《Chewing Gum》踩平衡車登場。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🤝 養成與深度共鳴</div>
+          <div class="card-text">主打少年感與成長陪伴，成為大眾眼中一同經歷青春徬徨與夢想的代表。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">✨ 7DREAM 的獨特羈絆</div>
+          <div class="card-text">7 位年齡相仿的成員在訓練與活動中建立了深厚默契，形成無法取代的情感核心。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/units/nct_dream.md]</div>
+    </div>
+
+    <!-- Slide 8: NCT DREAM 畢業制危機 -->
+    <div class="slide theme-dream" data-index="8">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 08 // Crisis & Challenge</span>
+        <h1 class="slide-title">體制危機：爭議性的 20 歲「畢業制」</h1>
+        <p class="slide-subtitle">當冰冷的企業體制遇上真實的少年羈絆</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">⚠️ 強制離隊規則</div>
+          <div class="card-text">體制規定滿 20 歲（成年）必須強制畢業離開 DREAM，由新少年替補。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">💔 Mark 畢業之痛</div>
+          <div class="card-text">2018 年底隊長 Mark 滿年齡強制畢業離隊，引發粉絲強烈不捨與抗議。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">⚡ 體制崩潰倒數</div>
+          <div class="card-text">2020 年四位同齡成員面臨集體畢業，DREAM 核心架構即將陷入實質解體。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/units/nct_dream.md]</div>
+    </div>
+
+    <!-- Slide 9: We Go Up 與 2020 體制修正 -->
+    <div class="slide theme-dream" data-index="9">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 09 // We Go Up Era</span>
+        <h1 class="slide-title">代表作 We Go Up 與 2020 體制修正</h1>
+        <p class="slide-subtitle">粉絲力量逆轉體制，7DREAM 永久定型</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">🛹 青春象徵 We Go Up</div>
+          <div class="card-text">街頭滑板少年、復古運動風與汗水，記錄下 Mark 畢業前最熱血的奔跑回憶。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔄 2020 官方廢除畢業制</div>
+          <div class="card-text">官方順應民意正式廢除畢業制，Mark 重新歸隊，7DREAM 宣告永久固定。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🏆 銷量神話爆發</div>
+          <div class="card-text">固定後接連發行多張正規大碟，創下數百萬張白金唱片銷量紀錄。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/units/nct_dream.md]</div>
+    </div>
+
+    <!-- Slide 10: WayV 大中華戰略 -->
+    <div class="slide theme-wayv" data-index="10">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 10 // Global Strategy</span>
+        <h1 class="slide-title">WayV (威神V)：大中華戰略與跨文化開拓</h1>
+        <p class="slide-subtitle">突破地理與語言邊界的高階在地化先鋒</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">🌏 獨立廠牌啟航</div>
+          <div class="card-text">2019 年由 Label V 營運出道，以全中文發行正式進軍大中華與全球市場。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🗣️ 跨國多語優勢</div>
+          <div class="card-text">成員精通中、英、韓、泰等多種語言，具備極強的國際巡演與交流實力。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔗 品牌重聚回歸</div>
+          <div class="card-text">後續正式回歸 NCT 品牌總體系，參與年度聯合企劃，深化多元文化互補。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/units/wayv.md]</div>
+    </div>
+
+    <!-- Slide 11: WayV 代表作 Turn Back Time -->
+    <div class="slide theme-wayv" data-index="11">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 11 // Turn Back Time Era</span>
+        <h1 class="slide-title">代表作解構：Turn Back Time 超越時空</h1>
+        <p class="slide-subtitle">硬派時空科幻與冷冽暗黑機械美學</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">⏳ 時空機械概念</div>
+          <div class="card-text">代表作以巨大機械齒輪鐘錶、時空倒流與牢籠覺醒，展現極具衝擊力的科幻感。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🚨 冷冽深紅警報</div>
+          <div class="card-text">暗黑鋼鐵背景搭配深紅警報光影，帶來緊張壓迫感與突破極限的戲劇張力。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">⚙️ 五人體制穩健前行</div>
+          <div class="card-text">歷經成員調整，現由錕、Ten、肖俊、亨德利、揚揚 5 人穩健展開全球巡迴。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/units/wayv.md]</div>
+    </div>
+
+    <!-- Slide 12: SM 3.0 改革宣告 -->
+    <div class="slide" data-index="12">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 12 // System Boundary</span>
+        <h1 class="slide-title">體制重大轉折：SM 3.0 宣告結束無限擴張</h1>
+        <p class="slide-subtitle">一個時代的句點：從無限實驗走向穩定成熟</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">🛑 2023 改革宣言</div>
+          <div class="card-text">SM 官方正式宣布永久終止 NCT「無限擴張」體制，不再增加海外後續分隊。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">❌ 取消未發企劃</div>
+          <div class="card-text">原定之美洲隊、中東隊等構想全部永久廢止，保護藝人身心與團隊穩定性。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔄 人員策略流動</div>
+          <div class="card-text">成員成燦與將太郎轉移至新男團 RIIZE 出道，NCT 體制邊界正式封閉定型。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/concepts/neo_culture_technology.md]</div>
+    </div>
+
+    <!-- Slide 13: NCT WISH 最終分隊 -->
+    <div class="slide theme-wish" data-index="13">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 13 // The Final Boundary</span>
+        <h1 class="slide-title">NCT WISH：無限擴張的治癒終章</h1>
+        <p class="slide-subtitle">最後一支小分隊，為龐大體系注入清新微風</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">🍀 體系最後一棒</div>
+          <div class="card-text">透過 2023 選秀實境秀誕生，成為 NCT 家族第 6 支、也是最後一支分隊。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🏟️ 東京巨蛋起航</div>
+          <div class="card-text">2024 年於東京巨蛋正式登台出道，由日韓 6 位純粹少年組成的全新陣容。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🕊️ 明亮治癒形象</div>
+          <div class="card-text">告別厚重實驗嘻哈與暗黑科幻，以最純白透明的晨光少年感為大眾願望應援。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/units/nct_wish.md]</div>
+    </div>
+
+    <!-- Slide 14: NCT WISH 代表作 Steady -->
+    <div class="slide theme-wish" data-index="14">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 14 // Steady Era</span>
+        <h1 class="slide-title">代表作解構：Steady 清新青春應援</h1>
+        <p class="slide-subtitle">千禧 Y2K 美學與薄荷微光的心靈治癒</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">🎧 千禧 Y2K 律動</div>
+          <div class="card-text">採用輕快跳動的 House Beat 與清爽吉他旋律，帶來晨曦微甜薄荷綠聽感。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">💚 幸運象徵意象</div>
+          <div class="card-text">MV 融入四葉草、翅膀與天使微光，以「陪伴願望成真」作為團隊精神。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🌈 體制色彩圓滿</div>
+          <div class="card-text">與 127 的霸氣、WayV 的冷冽、DREAM 的熱血，形成 NCT 完整美學光譜。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/units/nct_wish.md]</div>
+    </div>
+
+    <!-- Slide 15: NCT 全員年度大企劃 -->
+    <div class="slide" data-index="15">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 15 // Grand Gathering</span>
+        <h1 class="slide-title">全員集結：NCT 年度盛典大企劃</h1>
+        <p class="slide-subtitle">一年一度的宇宙共振，體制集大成的黃金盛宴</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">🌟 NCT 2018 (EMPATHY)</div>
+          <div class="card-text">18 人集結，首次展示全體制矩陣，推出《Black on Black》刀群舞震撼樂壇。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🪐 NCT 2020 (RESONANCE)</div>
+          <div class="card-text">23 人跨隊大融合，主打曲橫掃全球榜單，體制進入最巔峰的商業爆發期。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🌌 NCT 2021 (UNIVERSE)</div>
+          <div class="card-text">21 人共同探索新文化宇宙的音樂篇章，展現更加自由成熟的跨隊合作。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">👑 NCT 2023 (GOLDEN AGE)</div>
+          <div class="card-text">20 人體制共享黃金時代里程碑，為無限擴張時代寫下圓滿的盛大終章。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/timeline/system_timeline.md]</div>
+    </div>
+
+    <!-- Slide 16: 路人防迷航速查手冊 -->
+    <div class="slide" data-index="16">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 16 // Beginner Guide</span>
+        <h1 class="slide-title">路人防迷航：三步看懂 NCT 必備手冊</h1>
+        <p class="slide-subtitle">不再被複雜體制困惑的速成生存指引</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">🟢 認顏色不用認人</div>
+          <div class="card-text">只要看到「珍珠香檳綠」手燈螢光海，就是全體 NCT 體系的應援標誌。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🎵 依曲風喜好挑隊伍</div>
+          <div class="card-text">想聽實驗重低音選 127，想感受熱血青春選 DREAM，想聽清新治癒找 WISH。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔀 一人多隊是日常</div>
+          <div class="card-text">看到同一位成員（如楷燦）出現在不同隊伍表演，是體制常態無須驚訝。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: wiki/glossary/kpop_terms.md]</div>
+    </div>
+
+    <!-- Slide 17: 雙重小圈防錯工程與 Shift-Left -->
+    <div class="slide" data-index="17">
+      <div class="slide-header">
+        <span class="slide-tag">Chapter 17 // Engineering Architecture</span>
+        <h1 class="slide-title">幕後揭秘：雙重小圈防錯工程與 Shift-Left</h1>
+        <p class="slide-subtitle">講義第 26 頁實踐：大圈很少轉，小圈轉得快</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <span class="flow-badge">Gate 1: SSOT 狀態閘門</span>
+          <div class="card-title">🔒 鎖死事實防幻覺</div>
+          <div class="card-text">大綱前鎖死成員狀態，比對 2026 最新離隊年月與兵役，禁止模型外部記憶偷渡。</div>
+        </div>
+        <div class="card">
+          <span class="flow-badge">Gate 2: Spec 量化閘門</span>
+          <div class="card-title">📐 字數卡死防破版</div>
+          <div class="card-text">渲染前自動化腳本卡死：單頁字數 ≤ 120 字、卡片 ≤ 4 張、必附來源標記。</div>
+        </div>
+        <div class="card">
+          <span class="flow-badge">工程效益總結</span>
+          <div class="card-title">⚡ 小圈快速局部退回</div>
+          <div class="card-text">局部錯誤在源頭修正，避免最後整份 HTML 重跑大圈，達成 17 頁無溢出交付。</div>
+        </div>
+      </div>
+      <div class="source-tag">[來源: AGENTS.md, specs/ssot_facts.md]</div>
+    </div>
+
+  </main>
+
+  <!-- 底部控制 -->
+  <footer>
+    <div class="indicators" id="dotsContainer"></div>
+    <div class="controls">
+      <button id="prevBtn" onclick="prevSlide()">← PREV</button>
+      <button id="nextBtn" onclick="nextSlide()">NEXT →</button>
+    </div>
+  </footer>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 17;
+
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('dotsContainer');
+    const progressText = document.getElementById('progressText');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    // 生成 17 頁分頁小點
+    for (let i = 1; i <= totalSlides; i++) {
+      const dot = document.createElement('div');
+      dot.className = `dot ${i === 1 ? 'active' : ''}`;
+      dot.onclick = () => goToSlide(i);
+      dotsContainer.appendChild(dot);
+    }
+
+    function updateView() {
+      slides.forEach(slide => {
+        const idx = parseInt(slide.getAttribute('data-index'));
+        if (idx === currentSlide) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx + 1 === currentSlide);
+      });
+
+      const padIdx = currentSlide.toString().padStart(2, '0');
+      progressText.innerText = `Slide ${padIdx} / ${totalSlides}`;
+      prevBtn.disabled = currentSlide === 1;
+      nextBtn.disabled = currentSlide === totalSlides;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateView();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateView();
+      }
+    }
+
+    function goToSlide(idx) {
+      currentSlide = idx;
+      updateView();
+    }
+
+    // 支援鍵盤左右鍵與空白鍵切換
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      }
+    });
+
+    updateView();
+  </script>
+</body>
+</html>
